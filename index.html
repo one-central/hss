@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성남시 민원문자 010-5920-0184</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #f5f5f5;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            width: 100%;
+            font-size: 24px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .postit {
+            background-color: #f8e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .postit:hover {
+            transform: scale(1.05);
+        }
+
+        .postit:active {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1><a href="sms:01059200184">[▼더블클릭] 성남시 민원문자 010-5920-0184</a></h1>
+
+<div class="container" id="postit-container">
+    <div class="postit" data-content="도환중1구역 공사 소음으로 살수가 없습니다. 매일 매일 스트레스 받아서 잠을 잘 수가 없네요. 지도 및 관리 바랍니다."></div>
+    <div class="postit" data-content="도환중1구역 공사 먼지로 창문을 열수가 없어요. 가을이라 날씨도 좋은데 이게 사람 사는건지 모르겠네요. 환경 관리 부탁 드립니다."></div>
+    <div class="postit" data-content="도환중1구역 폭파 소음으로 창문이 깨질까봐 무섭습니다. 꼭 옆집이 무너지는거 같은 소리가 납니다. 구청/시청에서 지도 관리 부탁 드립니다."></div>
+    <div class="postit" data-content="저는 오후 늦게부터 새벽까지 일을 하는 교대 근무자인데, 도환중1구역 공사장에서 아침 7시만되면 깡깡깡 소리에 잠을 잘수가 없습니다. 저소음 저진동 공법으로 변경될때까지 공사 중단 바랍니다."></div>
+    <div class="postit" data-content="이렇게 소음과 진동, 먼지가 심각한데 성남시는 어떠한 대책도 내놓지 않고 주민들에게 그 피해를 고스란히 받아들이라는겁니까? 도환중1구역 소음 진동 먼지때문에 살수가 없습니다. 관리 감독 바랍니다."></div>
+    <div class="postit" data-content="학교 끝나고, 유치원 끝나고 놀이터에서 놀수가 없어요. 공사소음에 먼지에, 놀이터는 있으나 마나합니다. 도환중1구역 공사장에서 나는 소음과 먼지 문제에 대해 성남시가 적극적으로 해결 부탁 드립니다."></div>
+</div>
+
+<script>
+    // 모바일 장치 감지 함수
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // 화면에 포스트잇 내용 표시 및 동일 내용 복사 기능 유지
+    document.querySelectorAll('.postit').forEach(postit => {
+        const content = postit.getAttribute('data-content');
+        postit.innerHTML = content; // 화면에 내용 표시
+
+        // 클릭 시 클립보드에 복사
+        postit.addEventListener('click', function () {
+            copyToClipboard(content);
+        });
+
+        // 더블클릭 또는 롱클릭 시 모바일에서 SMS 전송
+        postit.addEventListener('dblclick', function () {
+            if (isMobile()) {
+                const smsLink = `sms:01059200184?&body=${encodeURIComponent(content)}`;
+                window.location.href = smsLink;
+            }
+        });
+
+        postit.addEventListener('touchstart', function (e) {
+            this.longPressTimer = setTimeout(() => {
+                if (isMobile()) {
+                    const smsLink = `sms:01059200184?&body=${encodeURIComponent(content)}`;
+                    window.location.href = smsLink;
+                }
+            }, 800);
+        });
+
+        postit.addEventListener('touchend', function (e) {
+            clearTimeout(this.longPressTimer);
+        });
+    });
+
+    // 포스트잇 순서를 랜덤으로 섞기
+    window.onload = function() {
+        const container = document.getElementById('postit-container');
+        const postits = Array.from(container.children);
+        const shuffled = postits.sort(() => Math.random() - 0.5); // 랜덤으로 섞기
+        container.innerHTML = ''; // 기존 요소들 제거
+        shuffled.forEach(postit => container.appendChild(postit)); // 섞인 순서로 재배치
+    };
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            //alert('복사되었습니다. : ' + text);
+        }).catch(err => {
+            console.error('복사에 실패했습니다.', err);
+        });
+    }
+</script>
+<br></br>
+    <a href="https://hits.sh/one-central.github.io/hss/"><img alt="Hits" src="https://hits.sh/one-central.github.io/hss.svg?style=flat-square&label=access&color=d2d2d2"/></a>
+</body>
+</html>

@@ -61,9 +61,9 @@
   </style>
 </head>
 <body>
-  <h1>[▼더블터치] 성남시 민원문자</h1>
+  <h1>[▼더블터치] 분홍색 - 112, 하늘색 - 성남시 민원문자</h1>
   <div class="container" id="postit-container">
-    <!-- 한 번만 작성된 템플릿 포스트잇 -->
+    <!-- 여러 내용의 템플릿 포스트잇 (id는 같은 값이지만 실제 처리는 querySelectorAll로 진행) -->
     <div class="postit" id="postit-template" data-content="성남 신흥역 하늘채 1단지 앞에, 아침 5시부터 오후 5시까지 시위 소음으로 일상생활이 힘듭니다!!! 주택가 시위 제한해주세요."></div>
     <div class="postit" id="postit-template" data-content="성남 신흥역 하늘채 1단지. 새벽 5시부터 하루종일 노조 시위로 인한 장송곡 소리가 들려서 정신이 없습니다! 주택가 시위 제한해주세요."></div>
     <div class="postit" id="postit-template" data-content="중앙동에 하루 종일 울려퍼지는 노조의 장송곡 소리가 정신건강을 해치고 있습니다. 즉각 조치 바랍니다."></div>
@@ -134,30 +134,34 @@
       });
     }
 
-    // DOM 로드 후 템플릿을 두 개의 포스트잇으로 복제
+    // DOM 로드 후, 각 템플릿 포스트잇을 두 개의 포스트잇(핑크, 하늘색)으로 변환
     window.addEventListener('DOMContentLoaded', function() {
       var container = document.getElementById('postit-container');
-      var template = document.getElementById('postit-template');
-      var content = template.getAttribute('data-content');
+      // 템플릿 선택: id가 "postit-template"인 모든 요소를 배열로 만듭니다.
+      var templates = Array.from(container.querySelectorAll('#postit-template'));
       
-      // 템플릿 제거
-      container.removeChild(template);
-      
-      // 핑크색 포스트잇 생성 (112 전송)
-      var pinkPostit = document.createElement('div');
-      pinkPostit.className = 'postit pink';
-      pinkPostit.setAttribute('data-content', content);
-      container.appendChild(pinkPostit);
-      attachPostitEvents(pinkPostit, "112");
+      // 각 템플릿 요소마다 두 개의 포스트잇을 생성
+      templates.forEach(function(template) {
+        var content = template.getAttribute('data-content');
+        // 템플릿 요소 제거
+        container.removeChild(template);
+        
+        // 핑크색 포스트잇 생성 (112 전송)
+        var pinkPostit = document.createElement('div');
+        pinkPostit.className = 'postit pink';
+        pinkPostit.setAttribute('data-content', content);
+        container.appendChild(pinkPostit);
+        attachPostitEvents(pinkPostit, "112");
+        
+        // 하늘색 포스트잇 생성 (010-5920-0184 전송)
+        var bluePostit = document.createElement('div');
+        bluePostit.className = 'postit blue';
+        bluePostit.setAttribute('data-content', content);
+        container.appendChild(bluePostit);
+        attachPostitEvents(bluePostit, "01059200184");
+      });
 
-      // 하늘색 포스트잇 생성 (010-5920-0184 전송)
-      var bluePostit = document.createElement('div');
-      bluePostit.className = 'postit blue';
-      bluePostit.setAttribute('data-content', content);
-      container.appendChild(bluePostit);
-      attachPostitEvents(bluePostit, "01059200184");
-
-      // 포스트잇 순서를 랜덤 배치 (원하는 경우)
+      // (선택사항) 모든 생성된 포스트잇의 순서를 랜덤으로 섞기
       var postits = Array.from(container.children);
       var shuffled = postits.sort(() => Math.random() - 0.5);
       container.innerHTML = '';

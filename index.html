@@ -1,158 +1,175 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>도환-성남시 민원문자 (112, 010-5920-0184)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background-color: #f5f5f5;
-            height: 100vh;
-            margin: 0;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            width: 100%;
-            font-size: 24px;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            width: 80%;
-            max-width: 1200px;
-        }
-
-        .postit {
-            background-color: #f8e0e0;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .postit:hover {
-            transform: scale(1.05);
-        }
-
-        .postit:active {
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도환-성남시 민원문자</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: #f5f5f5;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      width: 100%;
+      font-size: 24px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      width: 80%;
+      max-width: 1200px;
+    }
+    .postit {
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+    .postit:hover {
+      transform: scale(1.05);
+    }
+    .postit:active {
+      transform: scale(1.1);
+    }
+    /* 핑크색: 112로 전송 */
+    .pink {
+      background-color: #ffcccb;
+    }
+    /* 하늘색: 010-5920-0184로 전송 */
+    .blue {
+      background-color: #add8e6;
+    }
+    @media (max-width: 600px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <h1>[▼더블터치] 성남시 민원문자</h1>
+  <div class="container" id="postit-container">
+    <!-- 한 번만 작성된 템플릿 포스트잇 -->
+    <div class="postit" id="postit-template" data-content="성남 신흥역 하늘채 1단지 앞에, 아침 5시부터 오후 5시까지 시위 소음으로 일상생활이 힘듭니다!!! 주택가 시위 제한해주세요."></div>
+    <div class="postit" id="postit-template" data-content="성남 신흥역 하늘채 1단지. 새벽 5시부터 하루종일 노조 시위로 인한 장송곡 소리가 들려서 정신이 없습니다! 주택가 시위 제한해주세요."></div>
+    <div class="postit" id="postit-template" data-content="중앙동에 하루 종일 울려퍼지는 노조의 장송곡 소리가 정신건강을 해치고 있습니다. 즉각 조치 바랍니다."></div>
+    <div class="postit" id="postit-template" data-content="성남 신흥역 하늘채 1단지. 하루 종일 장송곡을 들려서 미칠 것 같습니다. 안그래도 사이비교회 때문에 미치겠는데, 완전히 돌아버리겠습니다. 제발좀 주택가 시위좀 제한 해주시기 바랍니다!!"></div>
+  </div>
 
-<!-- 클릭 시 sendSmsLink() 함수를 호출하여 SMS 전송 화면으로 이동 -->
-<h1><a href="#" onclick="sendSmsLink(''); return false;">[▼더블클릭] 성남시 민원문자 (112, 010-5920-0184)</a></h1>
-
-<div class="container" id="postit-container">
-    <div class="postit" data-content="성남 신흥역 하늘채 1단지 앞에, 아침 5시부터 오후 5시까지 시위 소음으로 일상생활이 힘듭니다!!! 주택가 시위 제한해주세요"></div>
-    <div class="postit" data-content="성남 신흥역 하늘채 1단지. 새벽 5시부터 하루종일 노조 시위로 인한 장송곡 소리가 들려서 정신이 없습니다! 주택가 시위 제한해주세요"></div>
-    <div class="postit" data-content="성남 신흥역 하늘채 1단지. 하루 종일 장송곡을 들려서 미칠 것 같습니다. 안그래도 사이비교회 때문에 미치겠는데, 완전히 돌아버리겠습니다. 제발좀 주택가 시위좀 제한 해주시기 바랍니다!!"></div>
-</div>
-
-<script>
+  <script>
     // 모바일 장치 감지 함수
     function isMobile() {
-        return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    // SMS 링크 생성 및 실행 함수
-    function sendSmsLink(body) {
-        var phoneNumbers = "112,01059200184";
-        var ua = navigator.userAgent || navigator.vendor || window.opera;
-        var smsLink = "";
-        if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-            // iOS 형식: 번호 목록 뒤에 ?&body= 메시지 본문 추가
-            smsLink = "sms:" + phoneNumbers;
-            if (body) {
-                smsLink += "?&body=" + encodeURIComponent(body);
-            }
-        } else {
-            // 안드로이드 형식: 주소들을 쿼리 파라미터로 전달
-            smsLink = "sms:?addresses=" + phoneNumbers;
-            if (body) {
-                smsLink += "&body=" + encodeURIComponent(body);
-            }
+    // SMS 링크 생성 함수
+    function sendSmsLink(phone, body) {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var smsLink = "";
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        smsLink = "sms:" + phone;
+        if (body) {
+          smsLink += "?&body=" + encodeURIComponent(body);
         }
-        window.location.href = smsLink;
+      } else {
+        smsLink = "sms:?addresses=" + phone;
+        if (body) {
+          smsLink += "&body=" + encodeURIComponent(body);
+        }
+      }
+      window.location.href = smsLink;
     }
 
-    // 포스트잇 내용 표시 및 복사 기능 유지
-    document.querySelectorAll('.postit').forEach(postit => {
-        const content = postit.getAttribute('data-content');
-        postit.innerHTML = content; // 내용 표시
-
-        // 클릭 시 클립보드에 복사
-        postit.addEventListener('click', function () {
-            copyToClipboard(content);
-        });
-
-        // 더블클릭 시 SMS 전송 (모바일에서 작동)
-        postit.addEventListener('dblclick', function () {
-            if (isMobile()) {
-                sendSmsLink(content);
-            }
-        });
-
-        // 롱클릭 (터치) 시 SMS 전송
-        postit.addEventListener('touchstart', function (e) {
-            this.longPressTimer = setTimeout(() => {
-                if (isMobile()) {
-                    sendSmsLink(content);
-                }
-            }, 800);
-        });
-
-        postit.addEventListener('touchend', function (e) {
-            clearTimeout(this.longPressTimer);
-        });
-    });
-
-    // 포스트잇 순서를 랜덤으로 섞기
-    window.onload = function() {
-        const container = document.getElementById('postit-container');
-        const postits = Array.from(container.children);
-        const shuffled = postits.sort(() => Math.random() - 0.5);
-        container.innerHTML = '';
-        shuffled.forEach(postit => container.appendChild(postit));
-    };
-
+    // 클립보드 복사 함수
     function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            // 복사 성공 시 메시지 표시 (필요에 따라 alert 주석 해제 가능)
-            // alert('복사되었습니다: ' + text);
-        }).catch(err => {
-            console.error('복사에 실패했습니다.', err);
-        });
+      navigator.clipboard.writeText(text).then(() => {
+        // 복사 성공 시 처리 (필요시 alert 등을 추가 가능)
+      }).catch(err => {
+        console.error('복사에 실패했습니다.', err);
+      });
     }
-</script>
-<br>
-    <a href="https://hits.sh/one-central.github.io/hss/"><img alt="Hits" src="https://hits.sh/one-central.github.io/hss.svg?style=flat-square&label=access&color=d2d2d2"/></a>
+
+    // 포스트잇에 이벤트 리스너 추가 함수 (전화번호에 따라 이벤트 처리)
+    function attachPostitEvents(postit, phone) {
+      var content = postit.getAttribute('data-content');
+      postit.innerHTML = content; // 내용 표시
+
+      // 단일 클릭 시 클립보드 복사
+      postit.addEventListener('click', function () {
+        copyToClipboard(content);
+      });
+
+      // 더블터치 시 SMS 전송 (모바일)
+      postit.addEventListener('dblclick', function () {
+        if (isMobile()) {
+          sendSmsLink(phone, content);
+        }
+      });
+
+      // 롱터치(터치 시작) 시 SMS 전송
+      postit.addEventListener('touchstart', function () {
+        this.longPressTimer = setTimeout(() => {
+          if (isMobile()) {
+            sendSmsLink(phone, content);
+          }
+        }, 800);
+      });
+
+      postit.addEventListener('touchend', function () {
+        clearTimeout(this.longPressTimer);
+      });
+    }
+
+    // DOM 로드 후 템플릿을 두 개의 포스트잇으로 복제
+    window.addEventListener('DOMContentLoaded', function() {
+      var container = document.getElementById('postit-container');
+      var template = document.getElementById('postit-template');
+      var content = template.getAttribute('data-content');
+      
+      // 템플릿 제거
+      container.removeChild(template);
+      
+      // 핑크색 포스트잇 생성 (112 전송)
+      var pinkPostit = document.createElement('div');
+      pinkPostit.className = 'postit pink';
+      pinkPostit.setAttribute('data-content', content);
+      container.appendChild(pinkPostit);
+      attachPostitEvents(pinkPostit, "112");
+
+      // 하늘색 포스트잇 생성 (010-5920-0184 전송)
+      var bluePostit = document.createElement('div');
+      bluePostit.className = 'postit blue';
+      bluePostit.setAttribute('data-content', content);
+      container.appendChild(bluePostit);
+      attachPostitEvents(bluePostit, "01059200184");
+
+      // 포스트잇 순서를 랜덤 배치 (원하는 경우)
+      var postits = Array.from(container.children);
+      var shuffled = postits.sort(() => Math.random() - 0.5);
+      container.innerHTML = '';
+      shuffled.forEach(function(postit) {
+        container.appendChild(postit);
+      });
+    });
+  </script>
+
+  <br>
+  <a href="https://hits.sh/one-central.github.io/hss/">
+    <img alt="Hits" src="https://hits.sh/one-central.github.io/hss.svg?style=flat-square&label=access&color=d2d2d2"/>
+  </a>
 </body>
 </html>

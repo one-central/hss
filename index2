@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중앙동-성남시 민원문자 010-5920-0184</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #f5f5f5;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            width: 100%;
+            font-size: 24px;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1200px;
+        }
+        .postit {
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 16px;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #eee;
+        }
+        .postit:hover {
+            transform: scale(1.05);
+        }
+        .postit:active {
+            transform: scale(1.09);
+        }
+        .welfare {
+            background-color: #fff9db !important; /* 연한 노란색 */
+            border-color: #ffe28b;
+        }
+        .underground {
+            background-color: #e5f7e9 !important; /* 연한 녹색 */
+            border-color: #b3e3c0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .postit {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>[▼더블클릭] 성남시 민원문자 <br> 010-5920-0184</h1>
+
+<div class="container" id="postit-container"></div>
+
+<script>
+    // 민원 데이터
+    const complaints = [
+        {
+            type: "welfare", // 복지시설부지
+            content: `중앙동 3002번지 복지시설 부지는 중1구역 재개발 입주가 완료된 지 3년이 지났음에도 불구하고, 성남시는 해당 부지를 방치하고 있습니다.
+이는 지역 주민에 대한 명백한 행정 방기이며, 주민의 복지권을 침해하는 행위입니다.
+
+해당 부지는 인근 5,800세대가 함께 사용할 수 있는 소중한 공공자산으로, 주민 복지를 위한 시설로 조속히 활용되어야 합니다.
+성남시는 더 이상 책임을 회피하지 말고, 중앙동 주민을 위한 복지시설을 즉각 건립하시기 바랍니다.`
+        },
+        {
+            type: "underground", // 전선지중화
+            content: `중앙동 하늘채·힐스테이트·해링턴 일대는 전선 지중화가 이루어지지 않아,
+공동주택에서 정전 사고 및 전기 설비 파손 피해가 반복적으로 발생하고 있습니다.
+전기 사고로 인해 수많은 세대가 불편을 겪고 있으며, 주민 안전까지 위협받는 상황입니다.
+
+성남시가 중앙동 주민을 더 이상 외면하지 않는다면,
+공동주택 밀집 지역인 중앙동에 대해 즉각적인 전선 지중화 대책을 마련해야 합니다.
+
+주민의 안전과 생활권 보호를 위해 조속한 조치를 강력히 요구합니다.`
+        },
+        {
+            type: "underground", // 전선지중화
+            content: `중앙동 하늘채·힐스테이트·해링턴 일대는 제일초등학교의 주요 통학로입니다.
+초등학교 인근은 아이들의 안전을 위해 전선 지중화를 최우선적으로 추진해야 하는 구역입니다.
+
+그럼에도 불구하고, 해당 구간은 여전히 전신주와 노출된 전선으로 인해
+어린이 보행 안전과 도시 미관에 심각한 문제를 초래하고 있습니다.
+
+성남시는 더 이상 지체하지 말고,
+제일초 인근 통학로에 대한 전선 지중화 대책을 조속히 마련하시기 바랍니다.`
+        },
+        {
+            type: "welfare", // 복지시설부지
+            content: `중앙동 3002번지 복지시설 부지는 중1구역 재개발 입주가 완료된 지 3년이 지났음에도 불구하고, 여전히 방치된 상태입니다.
+해당 부지는 인근 5,800세대 주민들이 함께 이용할 수 있는 수영장 등 다목적 복지시설로 활용되어야 마땅합니다.
+
+또한, 성호시장 재건축 역시 수년째 진척 없이 답보 상태에 머물러 있으며,
+이는 성남시의 중앙동 지역에 대한 무관심과 행정 외면으로 주민들에게 큰 실망을 주고 있습니다.
+
+중앙동 주민들의 정당한 요구를 더 이상 외면하지 마십시오.
+장기간 방치된 복지시설 부지 활용 및 성호시장 재건축을 조속히 추진해 주시기 바랍니다.`
+        },
+        {
+            type: "welfare", // 복지시설부지
+            content: `중앙동 3002번지 복지시설 부지는 인근 5,800세대 주민들이 오랫동안 기다려온 공공시설 부지입니다.
+이제는 수영장을 포함한 다목적 복지시설을 조속히 착공해야 할 시점입니다.
+
+해당 복지시설은 일부가 아닌 모든 세대가 함께 이용할 수 있는 공공시설로 조성되어야 하며,
+성남시는 이에 대한 명확한 입장과 실행 계획을 조속히 제시해주시기 바랍니다.
+
+더 이상의 지연은 주민 무시이며, 성남시의 책임 회피로밖에 보이지 않습니다.
+중앙동 주민들은 성남시의 책임 있는 답변을 기다리고 있습니다.`
+        }
+    ];
+
+    // 두 종류로 분류하여 번갈아 배치 (복지-지중화-복지-지중화-복지 등)
+    function alternateMixByType(arr) {
+        const welfareArr = arr.filter(c => c.type === "welfare");
+        const undergroundArr = arr.filter(c => c.type === "underground");
+        // 짧은 쪽을 기준으로 번갈아, 남는 것은 뒤에
+        let i = 0, j = 0, result = [];
+        let flag = true; // 시작을 welfare로
+        while (i < welfareArr.length || j < undergroundArr.length) {
+            if (flag && i < welfareArr.length) {
+                result.push(welfareArr[i++]);
+            } else if (!flag && j < undergroundArr.length) {
+                result.push(undergroundArr[j++]);
+            }
+            flag = !flag; // 번갈이
+            // 남는 것 뒤에 추가
+            if (i >= welfareArr.length && j < undergroundArr.length) {
+                while (j < undergroundArr.length) result.push(undergroundArr[j++]);
+            }
+            if (j >= undergroundArr.length && i < welfareArr.length) {
+                while (i < welfareArr.length) result.push(welfareArr[i++]);
+            }
+        }
+        return result;
+    }
+
+    // 화면에 포스트잇 생성 및 기능 부여
+    function renderPostIts() {
+        const container = document.getElementById('postit-container');
+        container.innerHTML = '';
+        const postits = alternateMixByType(complaints);
+        // 각 포스트잇에 클래스, 내용, 이벤트 추가
+        postits.forEach((item, idx) => {
+            const div = document.createElement('div');
+            div.className = 'postit ' + (item.type === "welfare" ? "welfare" : "underground");
+            div.setAttribute('data-content', item.content);
+            div.innerText = item.content;
+
+            // 클릭시 복사
+            div.addEventListener('click', function() {
+                copyToClipboard(item.content);
+            });
+            // 더블클릭시 SMS
+            div.addEventListener('dblclick', function() {
+                if (isMobile()) {
+                    const smsLink = `sms:01059200184?&body=${encodeURIComponent(item.content)}`;
+                    window.location.href = smsLink;
+                }
+            });
+            // 롱터치시 SMS
+            div.addEventListener('touchstart', function(e) {
+                this.longPressTimer = setTimeout(() => {
+                    if (isMobile()) {
+                        const smsLink = `sms:01059200184?&body=${encodeURIComponent(item.content)}`;
+                        window.location.href = smsLink;
+                    }
+                }, 800);
+            });
+            div.addEventListener('touchend', function(e) {
+                clearTimeout(this.longPressTimer);
+            });
+
+            container.appendChild(div);
+        });
+    }
+
+    // 모바일 감지
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    // 클립보드 복사
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            // 복사 완료시 추가 동작 X
+        }).catch(err => {
+            console.error('복사에 실패했습니다.', err);
+        });
+    }
+
+    window.onload = renderPostIts;
+</script>
+
+<br>
+<a href="https://hits.sh/hits.sh/one-central.github.io/hss/"><img alt="Hits" src="https://hits.sh/hits.sh/one-central.github.io/hss.svg?label=access"/></a>
+</body>
+</html>

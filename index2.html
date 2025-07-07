@@ -135,28 +135,36 @@
         }
     ];
 
-    // 두 종류로 분류하여 번갈아 배치 (복지-지중화-복지-지중화-복지 등)
-    function alternateMixByType(arr) {
-        const welfareArr = arr.filter(c => c.type === "welfare");
-        const undergroundArr = arr.filter(c => c.type === "underground");
-        // 짧은 쪽을 기준으로 번갈아, 남는 것은 뒤에
+    // Fisher-Yates 셔플 함수
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    // 각 그룹 랜덤 + 번갈아 배치
+    function alternateMixByTypeAndShuffle(arr) {
+        const welfareArr = shuffle(arr.filter(c => c.type === "welfare"));
+        const undergroundArr = shuffle(arr.filter(c => c.type === "underground"));
         let i = 0, j = 0, result = [];
-        let flag = true; // 시작을 welfare로
-        while (i < welfareArr.length || j < undergroundArr.length) {
-            if (flag && i < welfareArr.length) {
+        let flag = true; // true = welfare, false = underground
+
+        // 번갈아가며 추가
+        while (i < welfareArr.length && j < undergroundArr.length) {
+            if (flag) {
                 result.push(welfareArr[i++]);
-            } else if (!flag && j < undergroundArr.length) {
+            } else {
                 result.push(undergroundArr[j++]);
             }
-            flag = !flag; // 번갈이
-            // 남는 것 뒤에 추가
-            if (i >= welfareArr.length && j < undergroundArr.length) {
-                while (j < undergroundArr.length) result.push(undergroundArr[j++]);
-            }
-            if (j >= undergroundArr.length && i < welfareArr.length) {
-                while (i < welfareArr.length) result.push(welfareArr[i++]);
-            }
+            flag = !flag;
         }
+        // 남은 것 뒤에 추가
+        while (i < welfareArr.length) result.push(welfareArr[i++]);
+        while (j < undergroundArr.length) result.push(undergroundArr[j++]);
         return result;
     }
 
@@ -164,9 +172,8 @@
     function renderPostIts() {
         const container = document.getElementById('postit-container');
         container.innerHTML = '';
-        const postits = alternateMixByType(complaints);
-        // 각 포스트잇에 클래스, 내용, 이벤트 추가
-        postits.forEach((item, idx) => {
+        const postits = alternateMixByTypeAndShuffle(complaints);
+        postits.forEach((item) => {
             const div = document.createElement('div');
             div.className = 'postit ' + (item.type === "welfare" ? "welfare" : "underground");
             div.setAttribute('data-content', item.content);

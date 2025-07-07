@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중앙동-성남시 민원문자 010-5920-0184</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #f5f5f5;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            width: 100%;
+            font-size: 24px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .postit {
+            background-color: #fff6cc;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .postit:hover {
+            transform: scale(1.05);
+        }
+
+        .postit:active {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1><a href="sms:01059200184">[▼더블클릭] 성남시 민원문자 010-5920-0184</a></h1>
+
+<div class="container" id="postit-container">
+    <div class="postit" data-content="중앙동 3002번지에 인근 5800세대가 사용 할수 있는 수영장등 다목적 복지 시설 건축을 요청합니다!! 3년넘게 비어있는 복지시설 부지와 성호시장 개발 부진 성남시의 무관심에 중앙동 주민들은 섭섭합니다!!!"></div>
+    <div class="postit" data-content="중앙동 하늘채 힐스 해링턴 일대 전선 지중화가 되어있지 않아 공동주택의 정전사고 피해가 발생하고 있습니다. 공동주택의 많은세대에 전기 시설이 파손되고 있습니다. 성남시가 중앙동 주민을 뒤로하지 않는다면 공동주택 밀집 지역 중앙동에 지중화 대책 마련해주기를 바랍니다!!!"></div>
+    <div class="postit" data-content="중앙동 하늘채 힐스 해링턴 일대는 제일초등학교 통학로입니다. 초등학교 인근은 최우선적으로 전선 지중화를 추진하는 것으로 알고 있습니다. 조속한 지중화 대책 마련해 주세요."></div>
+    <div class="postit" data-content="중앙동 3002번지 복지시설 부지는 중1구역 재개발 입주가 끝난지 3년이 지난 지금까지도 성남시에 의해 방치되고 있습니다. 인근 5800세대가 함께 사용할 수 있는 중앙동 주민의 복지 시설을 건축해주세요."></div>
+    <div class="postit" data-content="중앙동 3002번지에 인근 5800세대가 기다리는 수영장 포함된 복지시설을 진행해주시기 바랍니다. 특정 세대가 아닌  모든 세대가 사용할 수 있는 복지시설을 건축해 주세요!! 성남시의 답변을 기다립니다."></div>
+</div>
+
+<script>
+    // 모바일 장치 감지 함수
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // 화면에 포스트잇 내용 표시 및 동일 내용 복사 기능 유지
+    document.querySelectorAll('.postit').forEach(postit => {
+        const content = postit.getAttribute('data-content');
+        postit.innerHTML = content; // 화면에 내용 표시
+
+        // 클릭 시 클립보드에 복사
+        postit.addEventListener('click', function () {
+            copyToClipboard(content);
+        });
+
+        // 더블클릭 또는 롱클릭 시 모바일에서 SMS 전송
+        postit.addEventListener('dblclick', function () {
+            if (isMobile()) {
+                const smsLink = `sms:01059200184?&body=${encodeURIComponent(content)}`;
+                window.location.href = smsLink;
+            }
+        });
+
+        postit.addEventListener('touchstart', function (e) {
+            this.longPressTimer = setTimeout(() => {
+                if (isMobile()) {
+                    const smsLink = `sms:01059200184?&body=${encodeURIComponent(content)}`;
+                    window.location.href = smsLink;
+                }
+            }, 800);
+        });
+
+        postit.addEventListener('touchend', function (e) {
+            clearTimeout(this.longPressTimer);
+        });
+    });
+
+    // 포스트잇 순서를 랜덤으로 섞기
+    window.onload = function() {
+        const container = document.getElementById('postit-container');
+        const postits = Array.from(container.children);
+        const shuffled = postits.sort(() => Math.random() - 0.5); // 랜덤으로 섞기
+        container.innerHTML = ''; // 기존 요소들 제거
+        shuffled.forEach(postit => container.appendChild(postit)); // 섞인 순서로 재배치
+    };
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            //alert('복사되었습니다. : ' + text);
+        }).catch(err => {
+            console.error('복사에 실패했습니다.', err);
+        });
+    }
+</script>
+<br></br>
+    <a href="https://hits.sh/hits.sh/one-central.github.io/hss/"><img alt="Hits" src="https://hits.sh/hits.sh/one-central.github.io/hss.svg?label=access"/></a>
+</body>
+</html>
